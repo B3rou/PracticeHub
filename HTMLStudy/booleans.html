@@ -1,0 +1,41 @@
+<html>
+<head>
+    <style>
+        .Toros.Button {
+            background-color: yellow;
+        }
+
+        .Orange.Button {
+            background-color: orange;
+        }
+    </style>
+    <title>Toros</title>
+
+</head>
+
+<body>
+
+    <button class="Toros Button" onclick="guncelle()">Toros</button>
+
+    <p>Toros, 1. Sınıf Bilgisayar Mühendisliği Öğrencisidir.</p>
+
+    <p id="sinir-gostergesi">Sinir Katsayısı: </p>
+
+</body>
+
+<script>
+    let x = 70;
+    const sinirParagrafi = document.getElementById("sinir-gostergesi");
+    sinirParagrafi.innerHTML = `Sinir Katsayısı: ${x}`;
+    function guncelle() {
+        if (x < 100) {
+            alert(`Efendim? ${x}`);
+        } else {
+            alert(`Ne var lan!`);
+        }
+        x += 10;
+        sinirParagrafi.innerHTML = `Sinir Katsayısı: ${x}`;
+    }
+</script>
+
+</html>
