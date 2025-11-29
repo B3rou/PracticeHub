@@ -1,0 +1,76 @@
+<html>
+<head>
+    <style>
+        .Toros.Button {
+            background-color: blue;
+        }
+
+        .Orange.Button {
+            background-color: orange;
+        }
+    </style>
+    <title>Toros</title>
+
+</head>
+
+<body>
+    <p>Taş Kağıt Makas?</p>
+    <button onclick="tas()">Tas</button>
+    <button onclick="kagit()">Kagit</button>
+    <button onclick="makas()">Makas</button>
+    <p id="Torosun-Secimi">Toros Şunu Seçti: </p>
+    <p id="Kazanan-gostergesi">Kazanan: </p>
+
+</body>
+
+<script>
+    let secim;
+    let x;
+    let winner = 'Kimse'
+    const KazananGostergesi = document.getElementById("Kazanan-gostergesi");
+    const TorosunSecimi = document.getElementById("Torosun-Secimi");
+    function tas() {
+       x = Math.random();
+       if (x < 1/3){
+        winner = "Berabare";
+        TorosunSecimi.innerHTML = `Toros Şunu Seçti: Taş`;
+       } else if (2/3 <= x){
+        winner = "Toros Kazandı";
+        TorosunSecimi.innerHTML = `Toros Şunu Seçti: Kağıt`;
+       } else {
+        winner = "Sen Kazandın";
+        TorosunSecimi.innerHTML = `Toros Şunu Seçti: Makas`;
+       }
+        KazananGostergesi.innerHTML = `Kazanan: ${winner}`;
+    }
+    function kagit() {
+       x = Math.random();
+       if (x < 1/3){
+        winner = "Sen Kazandın";
+        TorosunSecimi.innerHTML = `Toros Şunu Seçti: Taş`;
+       } else if (2/3 <= x){
+        winner = "Berabere";
+        TorosunSecimi.innerHTML = `Toros Şunu Seçti: Kağıt`;
+       } else {
+        winner = "Toros Kazandı";
+        TorosunSecimi.innerHTML = `Toros Şunu Seçti: Makas`;
+       }
+        KazananGostergesi.innerHTML = `Kazanan: ${winner}`;
+    }
+    function makas() {
+       x = Math.random();
+       if (x < 1/3){
+        winner = "Toros Kazandı";
+        TorosunSecimi.innerHTML = `Toros Şunu Seçti: Taş`;
+       } else if (2/3 <= x){
+        winner = "Sen Kazandın";
+        TorosunSecimi.innerHTML = `Toros Şunu Seçti: Kağıt`;
+       } else {
+        winner = "Berabere";
+        TorosunSecimi.innerHTML = `Toros Şunu Seçti: Makas`;
+       }
+        KazananGostergesi.innerHTML = `Kazanan: ${winner}`;
+    }
+</script>
+
+</html>
