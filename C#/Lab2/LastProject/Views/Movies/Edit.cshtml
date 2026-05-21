@@ -1,0 +1,141 @@
+@model OOPHw.Models.Movie
+
+@{
+    ViewData["Title"] = "Film Düzenle";
+}
+
+<div class="container py-4">
+    <div class="mb-4">
+        <a asp-action="Index" class="btn btn-link text-decoration-none ps-0">
+            <i class="bi bi-arrow-left me-1"></i>Film Listesine Dön
+        </a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white py-3">
+                    <h4 class="mb-0 fw-bold"><i class="bi bi-pencil-square me-2"></i>Film Bilgilerini Güncelle</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <!-- Hidden Fields -->
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="PosterPath" />
+
+                        <div class="row g-3">
+                            <!-- Title -->
+                            <div class="col-md-12">
+                                <label asp-for="Title" class="form-label fw-bold"></label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Genre -->
+                            <div class="col-md-6">
+                                <label asp-for="Genre" class="form-label fw-bold"></label>
+                                <input asp-for="Genre" class="form-control" />
+                                <span asp-validation-for="Genre" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Director -->
+                            <div class="col-md-6">
+                                <label asp-for="Director" class="form-label fw-bold"></label>
+                                <input asp-for="Director" class="form-control" />
+                                <span asp-validation-for="Director" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Release Year -->
+                            <div class="col-md-6">
+                                <label asp-for="ReleaseYear" class="form-label fw-bold"></label>
+                                <input asp-for="ReleaseYear" type="number" class="form-control" />
+                                <span asp-validation-for="ReleaseYear" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="col-md-6">
+                                <label asp-for="Rating" class="form-label fw-bold"></label>
+                                <input asp-for="Rating" type="number" step="0.1" class="form-control" />
+                                <span asp-validation-for="Rating" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Is Favorite Switch -->
+                            <div class="col-md-6 d-flex align-items-center">
+                                <div class="form-check form-switch mt-4 ms-2">
+                                    <input class="form-check-input" type="checkbox" asp-for="IsFavorite" id="isFavoriteEdit" />
+                                    <label class="form-check-label fw-bold text-secondarySmall" for="isFavoriteEdit">Favorilerimde Tut</label>
+                                </div>
+                            </div>
+
+                            <!-- Existing Poster Image -->
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold d-block">Mevcut Afiş</label>
+                                <div class="mb-3">
+                                    @if (!string.IsNullOrEmpty(Model.PosterPath))
+                                    {
+                                        <img src="@Model.PosterPath" alt="@Model.Title Afişi" class="img-thumbnail" style="max-height: 180px;" />
+                                    }
+                                    else
+                                    {
+                                        <div class="p-3 bg-light text-muted border rounded d-inline-block small">
+                                            <i class="bi bi-image me-1"></i>Afiş Yok
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Poster File (For uploading new) -->
+                            <div class="col-md-12">
+                                <label asp-for="PosterFile" class="form-label fw-bold">Yeni Afiş Yükle (Değiştirmek İsterseniz)</label>
+                                <input asp-for="PosterFile" type="file" class="form-control" id="posterInput" accept="image/*" />
+                                <span asp-validation-for="PosterFile" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Preview Area -->
+                            <div class="col-md-12 text-center d-none" id="previewContainer">
+                                <div class="mt-3">
+                                    <label class="form-label fw-bold d-block">Yeni Seçilen Afiş Önizlemesi</label>
+                                    <img id="imagePreview" src="#" alt="Afiş Önizleme" class="img-thumbnail" style="max-height: 200px;" />
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <!-- Submit Buttons -->
+                            <div class="col-md-12 d-flex justify-content-end gap-2">
+                                <a asp-action="Index" class="btn btn-outline-secondary px-4">İptal</a>
+                                <button type="submit" class="btn btn-success px-4">
+                                    <i class="bi bi-check-lg me-2"></i>Değişiklikleri Kaydet
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        document.getElementById('posterInput').addEventListener('change', function(e) {
+            const previewContainer = document.getElementById('previewContainer');
+            const imagePreview = document.getElementById('imagePreview');
+            const file = e.target.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imagePreview.src = event.target.result;
+                    previewContainer.classList.remove('d-none');
+                }
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.classList.add('d-none');
+            }
+        });
+    </script>
+}

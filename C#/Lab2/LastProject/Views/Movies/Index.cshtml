@@ -1,0 +1,135 @@
+@model IEnumerable<OOPHw.Models.Movie>
+
+@{
+    ViewData["Title"] = "Film Arşivi";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2 text-primary fw-bold"><i class="bi bi-film me-2"></i>Film Arşiv Sistemi</h1>
+            <p class="text-muted">Koleksiyonunuzdaki tüm filmleri yönetin ve arayın.</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary btn-lg shadow-sm">
+            <i class="bi bi-plus-lg me-2"></i>Yeni Film Ekle
+        </a>
+    </div>
+
+    <!-- Search and Filter Bar -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-3 bg-light rounded">
+            <form asp-action="Index" method="get" class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondarySmall">Film Adı ile Ara</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" name="searchString" value="@ViewBag.CurrentSearch" class="form-control border-start-0 ps-0" placeholder="Film adı giriniz..." />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold text-secondarySmall">Türe Göre Filtrele</label>
+                    <select name="movieGenre" class="form-select" asp-items="ViewBag.Genres">
+                        <option value="">Tüm Türler</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check form-switch mb-2 ms-md-2" style="padding-bottom: 2px;">
+                        <input class="form-check-input" type="checkbox" name="onlyFavorites" value="true" id="onlyFavoritesSwitch" @(ViewBag.OnlyFavorites ? "checked" : "") onchange="this.form.submit();" />
+                        <label class="form-check-label fw-bold text-secondarySmall" for="onlyFavoritesSwitch">Sadece Favoriler</label>
+                    </div>
+                </div>
+                <div class="col-md-2 d-grid gap-2 d-md-flex">
+                    <button type="submit" class="btn btn-dark flex-grow-1"><i class="bi bi-funnel me-2"></i>Filtrele</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-clockwise"></i></a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Movie Grid -->
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <div class="display-1 text-muted mb-3"><i class="bi bi-camera-reels"></i></div>
+            <h4 class="text-secondary">Arşivde film bulunamadı</h4>
+            <p class="text-muted">Arama kriterlerinizi değiştirebilir veya yeni bir film ekleyebilirsiniz.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-3">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm movie-card position-relative overflow-hidden">
+                        
+                        <!-- Favorite Heart Toggle -->
+                        <form asp-action="ToggleFavorite" method="post" class="position-absolute top-0 start-0 m-2 z-3">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                            <button type="submit" class="btn btn-sm btn-light border-0 shadow-sm rounded-circle p-0 d-flex align-items-center justify-content-center fav-btn" style="width: 32px; height: 32px;" title="@(item.IsFavorite ? "Favorilerden Çıkar" : "Favorilere Ekle")">
+                                @if (item.IsFavorite)
+                                {
+                                    <i class="bi bi-heart-fill text-danger fs-6"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-heart text-secondary fs-6"></i>
+                                }
+                            </button>
+                        </form>
+
+                        <!-- Rating Badge -->
+                        <div class="position-absolute top-0 end-0 m-2 z-3">
+                            <span class="badge bg-warning text-dark fw-bold fs-6 shadow-sm">
+                                <i class="bi bi-star-fill me-1"></i>@item.Rating.ToString("0.0")
+                            </span>
+                        </div>
+
+                        <!-- Poster Image -->
+                        <div class="ratio ratio-2x3 bg-dark">
+                            @if (!string.IsNullOrEmpty(item.PosterPath))
+                            {
+                                <img src="@item.PosterPath" class="card-img-top object-fit-cover movie-poster" alt="@item.Title" />
+                            }
+                            else
+                            {
+                                <div class="d-flex flex-column align-items-center justify-content-center text-white-50 p-3 h-100">
+                                    <i class="bi bi-image fs-1 mb-2"></i>
+                                    <span class="text-center small">Afiş Eklenmemiş</span>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-light text-dark align-self-start mb-2 px-2 py-1 border border-secondary-subtle">
+                                @item.Genre
+                            </span>
+                            <h5 class="card-title text-dark fw-bold mb-1 text-truncate" title="@item.Title">
+                                @item.Title
+                            </h5>
+                            <p class="card-text text-muted small mb-3">
+                                <span class="d-block"><i class="bi bi-person me-1"></i>@item.Director</span>
+                                <span class="d-block"><i class="bi bi-calendar-event me-1"></i>Yayın Yılı: @item.ReleaseYear</span>
+                            </p>
+                            
+                            <!-- Action Buttons -->
+                            <div class="mt-auto d-flex gap-1">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary flex-grow-1" title="Düzenle">
+                                    <i class="bi bi-pencil-square me-1"></i>Düzenle
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info text-dark" title="Detaylar">
+                                    <i class="bi bi-info-circle"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Sil">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

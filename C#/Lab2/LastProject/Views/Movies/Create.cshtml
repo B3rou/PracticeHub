@@ -1,0 +1,121 @@
+@model OOPHw.Models.Movie
+
+@{
+    ViewData["Title"] = "Yeni Film Ekle";
+}
+
+<div class="container py-4">
+    <div class="mb-4">
+        <a asp-action="Index" class="btn btn-link text-decoration-none ps-0">
+            <i class="bi bi-arrow-left me-1"></i>Film Listesine Dön
+        </a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white py-3">
+                    <h4 class="mb-0 fw-bold"><i class="bi bi-plus-circle me-2"></i>Yeni Film Ekle</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row g-3">
+                            <!-- Title -->
+                            <div class="col-md-12">
+                                <label asp-for="Title" class="form-label fw-bold"></label>
+                                <input asp-for="Title" class="form-control" placeholder="Örn: Inception" />
+                                <span asp-validation-for="Title" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Genre -->
+                            <div class="col-md-6">
+                                <label asp-for="Genre" class="form-label fw-bold"></label>
+                                <input asp-for="Genre" class="form-control" placeholder="Örn: Bilim Kurgu, Aksiyon" />
+                                <span asp-validation-for="Genre" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Director -->
+                            <div class="col-md-6">
+                                <label asp-for="Director" class="form-label fw-bold"></label>
+                                <input asp-for="Director" class="form-control" placeholder="Örn: Christopher Nolan" />
+                                <span asp-validation-for="Director" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Release Year -->
+                            <div class="col-md-6">
+                                <label asp-for="ReleaseYear" class="form-label fw-bold"></label>
+                                <input asp-for="ReleaseYear" type="number" class="form-control" placeholder="Örn: 2010" />
+                                <span asp-validation-for="ReleaseYear" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="col-md-6">
+                                <label asp-for="Rating" class="form-label fw-bold"></label>
+                                <input asp-for="Rating" type="number" step="0.1" class="form-control" placeholder="Örn: 8.8" />
+                                <span asp-validation-for="Rating" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Is Favorite Switch -->
+                            <div class="col-md-6 d-flex align-items-center">
+                                <div class="form-check form-switch mt-4 ms-2">
+                                    <input class="form-check-input" type="checkbox" asp-for="IsFavorite" id="isFavoriteCreate" />
+                                    <label class="form-check-label fw-bold text-secondarySmall" for="isFavoriteCreate">Bu Filmi Favorilerime Ekle</label>
+                                </div>
+                            </div>
+
+                            <!-- Poster File -->
+                            <div class="col-md-12">
+                                <label asp-for="PosterFile" class="form-label fw-bold"></label>
+                                <input asp-for="PosterFile" type="file" class="form-control" id="posterInput" accept="image/*" />
+                                <span asp-validation-for="PosterFile" class="text-danger small"></span>
+                                <div class="form-text">Film afişi için bir görsel yükleyin (PNG, JPG, JPEG).</div>
+                            </div>
+
+                            <!-- Preview Area -->
+                            <div class="col-md-12 text-center d-none" id="previewContainer">
+                                <div class="mt-3">
+                                    <label class="form-label fw-bold d-block">Seçilen Afiş Önizlemesi</label>
+                                    <img id="imagePreview" src="#" alt="Afiş Önizleme" class="img-thumbnail" style="max-height: 250px;" />
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <!-- Submit Buttons -->
+                            <div class="col-md-12 d-flex justify-content-end gap-2">
+                                <a asp-action="Index" class="btn btn-outline-secondary px-4">İptal</a>
+                                <button type="submit" class="btn btn-primary px-4">
+                                    <i class="bi bi-save me-2"></i>Filmi Kaydet
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        document.getElementById('posterInput').addEventListener('change', function(e) {
+            const previewContainer = document.getElementById('previewContainer');
+            const imagePreview = document.getElementById('imagePreview');
+            const file = e.target.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imagePreview.src = event.target.result;
+                    previewContainer.classList.remove('d-none');
+                }
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.classList.add('d-none');
+            }
+        });
+    </script>
+}

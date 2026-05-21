@@ -1,0 +1,55 @@
+@model OOPHw.Models.Movie
+
+@{
+    ViewData["Title"] = "Film Sil";
+}
+
+<div class="container py-4">
+    <div class="mb-4">
+        <a asp-action="Index" class="btn btn-link text-decoration-none ps-0">
+            <i class="bi bi-arrow-left me-1"></i>Film Listesine Dön
+        </a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm border-top border-danger border-4">
+                <div class="card-body p-4 text-center">
+                    <div class="text-danger display-3 mb-3"><i class="bi bi-exclamation-triangle"></i></div>
+                    <h3 class="card-title fw-bold text-dark mb-2">Filmi Silmek İstiyor musunuz?</h3>
+                    <p class="text-muted mb-4">Bu işlem geri alınamaz ve film veritabanından kalıcı olarak silinecektir.</p>
+
+                    <!-- Movie Info Brief -->
+                    <div class="d-flex align-items-center justify-content-center gap-3 p-3 bg-light rounded text-start mb-4">
+                        @if (!string.IsNullOrEmpty(Model.PosterPath))
+                        {
+                            <img src="@Model.PosterPath" alt="@Model.Title" class="rounded object-fit-cover shadow-sm" style="width: 70px; height: 100px;" />
+                        }
+                        else
+                        {
+                            <div class="bg-secondary text-white rounded d-flex align-items-center justify-content-center" style="width: 70px; height: 100px;">
+                                <i class="bi bi-film fs-3"></i>
+                            </div>
+                        }
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">@Model.Title</h5>
+                            <span class="badge bg-secondary mb-2">@Model.Genre</span>
+                            <div class="small text-muted"><i class="bi bi-person me-1"></i>Yönetmen: @Model.Director</div>
+                            <div class="small text-muted"><i class="bi bi-calendar-event me-1"></i>Yayın Yılı: @Model.ReleaseYear</div>
+                        </div>
+                    </div>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="d-flex justify-content-center gap-2">
+                            <a asp-action="Index" class="btn btn-outline-secondary px-4">İptal</a>
+                            <button type="submit" class="btn btn-danger px-4">
+                                <i class="bi bi-trash me-2"></i>Evet, Sil
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
