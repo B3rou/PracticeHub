@@ -154,30 +154,36 @@ int main() {
     
     Patient* examinationRoomTop = NULL; // Stack
     Patient* historyHead = NULL;        // Linked List Head
-    Patient* historyTail = NULL;        // Linked List Tail for O(1) appending
+    Patient* historyTail = NULL;        // Linked List Tail
 
     // 2. Register Patients
     enqueue(&waitingRoom, 1, "Ahmet");
     enqueue(&waitingRoom, 2, "Mehmet");
     enqueue(&waitingRoom, 3, "Ayse");
 
-    printf("=== Baslangic Durumu ===\n");
+    printf("\n=== Baslangic Durumu ===\n");
     displayAll(&waitingRoom, examinationRoomTop, historyHead);
 
+    printf("=== Hasta Aktarim Islemleri ===\n");
+    
     // 3. Process Ahmet
-    // Dequeue from waiting room -> push to examination room
+    printf("> Ahmet muayeneye aliniyor...\n");
     push(&examinationRoomTop, dequeue(&waitingRoom));
     
-    // Pop from examination room -> add to history
+    printf("> Ahmet'in muayenesi tamamlandi, gecmise ekleniyor...\n");
     addToHistory(&historyHead, &historyTail, pop(&examinationRoomTop));
 
     // 4. Process Mehmet
+    printf("> Mehmet muayeneye aliniyor...\n");
     push(&examinationRoomTop, dequeue(&waitingRoom));
+    
+    printf("> Mehmet'in muayenesi tamamlandi, gecmise ekleniyor...\n");
     addToHistory(&historyHead, &historyTail, pop(&examinationRoomTop));
     
-    // 5. Ayse stays in the queue
+    // 5. Ayse stays in the queue (No action needed)
+    printf("> Ayse su an bekliyor.\n\n");
 
-    // 6. Final State Print
+    // 6. Final State Print (Exactly matching the required output format)
     printf("=== Tum Islemler Sonrasi ===\n");
     displayAll(&waitingRoom, examinationRoomTop, historyHead);
 
