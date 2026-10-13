@@ -27,7 +27,7 @@ Welcome to the Data Structures and Algorithms section of my PracticeHub. This di
 - 📁 **[Week 5: Data Structure Integration](./Week%205)**
   * Combining Queues, Stacks, and Linked Lists into a single pipeline.
   * Utilizing universal node structures to transfer data between distinct abstract types.
-  * Pointer isolation and safe memory rewiring during node transition.
+  * Exposing intermediate memory states and executing safe pointer isolation.
 
 ## Technologies & Concepts
 - **Language:** C
