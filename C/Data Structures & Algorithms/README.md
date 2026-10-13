@@ -24,6 +24,11 @@ Welcome to the Data Structures and Algorithms section of my PracticeHub. This di
   * Managing complex bidirectional memory references via Doubly Linked Lists.
   * Building interactive simulations (Music Player, Undo feature, Printer Job Spooler).
 
+- 📁 **[Week 5: Data Structure Integration](./Week%205)**
+  * Combining Queues, Stacks, and Linked Lists into a single pipeline.
+  * Utilizing universal node structures to transfer data between distinct abstract types.
+  * Pointer isolation and safe memory rewiring during node transition.
+
 ## Technologies & Concepts
 - **Language:** C
 - **Core Concepts:** Big-O Notation, Pointers, Dynamic Memory Management, Linear Data Structures (Singly & Doubly Linked Lists), Stacks (LIFO), Queues (FIFO), Two-Pointer Techniques.
