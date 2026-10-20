@@ -29,6 +29,11 @@ Welcome to the Data Structures and Algorithms section of my PracticeHub. This di
   * Utilizing universal node structures to transfer data between distinct abstract types.
   * Exposing intermediate memory states and executing safe pointer isolation.
 
+- 📁 **[Week 6: Binary Search Trees (BST)](./Week%206)**
+  * Building hierarchical Binary Search Trees with dynamic node allocation.
+  * Inorder traversal for sorted data output.
+  * $O(\log n)$ key search operations and extreme value extraction (min/max).
+
 ## Technologies & Concepts
 - **Language:** C
-- **Core Concepts:** Big-O Notation, Pointers, Dynamic Memory Management, Linear Data Structures (Singly & Doubly Linked Lists), Stacks (LIFO), Queues (FIFO), Two-Pointer Techniques.
+- **Core Concepts:** Big-O Notation, Pointers, Dynamic Memory Management, Linear Data Structures (Singly & Doubly Linked Lists), Stacks (LIFO), Queues (FIFO), Two-Pointer Techniques, Hierarchical Data Structures (Binary Search Trees), Tree Traversals (Inorder, Preorder, Postorder).
