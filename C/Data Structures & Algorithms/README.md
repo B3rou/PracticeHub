@@ -34,6 +34,11 @@ Welcome to the Data Structures and Algorithms section of my PracticeHub. This di
   * Inorder traversal for sorted data output.
   * $O(\log n)$ key search operations and extreme value extraction (min/max).
 
+- 📁 **[Week 7: Treasure Tree Game (Recursive Search)](./Week%207)**
+  * Recursive Binary Search Tree search implementation.
+  * Real-time traversal tracking per recursion step.
+  * Worst-case complexity analysis via tree height calculation ( $O(h)$ ).
+
 ## Technologies & Concepts
 - **Language:** C
-- **Core Concepts:** Big-O Notation, Pointers, Dynamic Memory Management, Linear Data Structures (Singly & Doubly Linked Lists), Stacks (LIFO), Queues (FIFO), Two-Pointer Techniques, Hierarchical Data Structures (Binary Search Trees), Tree Traversals (Inorder, Preorder, Postorder).
+- **Core Concepts:** Big-O Notation, Pointers, Dynamic Memory Management, Linear Data Structures (Singly & Doubly Linked Lists), Stacks (LIFO), Queues (FIFO), Two-Pointer Techniques, Hierarchical Data Structures (Binary Search Trees), Tree Traversals (Inorder, Preorder, Postorder), Recursion & Recursive Search, Tree Metrics (Height & Depth Calculation).
