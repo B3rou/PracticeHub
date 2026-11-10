@@ -39,6 +39,11 @@ Welcome to the Data Structures and Algorithms section of my PracticeHub. This di
   * Real-time traversal tracking per recursion step.
   * Worst-case complexity analysis via tree height calculation ( $O(h)$ ).
 
+- 📁 **[Week 9: AVL Trees & Self-Balancing Search Trees](./Week%209)**
+  * Fundamentals of Self-Balancing Binary Search Trees (AVL Trees).
+  * Implementation of single (`rotateLeft`, `rotateRight`) and double rotations (`rotateLeftRight`, `rotateRightLeft`).
+  * Comparative analysis of height-balanced (AVL) vs. color-balanced (Red-Black) and multi-way (2-3) trees.
+
 ## Technologies & Concepts
 - **Language:** C
-- **Core Concepts:** Big-O Notation, Pointers, Dynamic Memory Management, Linear Data Structures (Singly & Doubly Linked Lists), Stacks (LIFO), Queues (FIFO), Two-Pointer Techniques, Hierarchical Data Structures (Binary Search Trees), Tree Traversals (Inorder, Preorder, Postorder), Recursion & Recursive Search, Tree Metrics (Height & Depth Calculation).
+- **Core Concepts:** Big-O Notation, Pointers, Dynamic Memory Management, Linear Data Structures (Singly & Doubly Linked Lists), Stacks (LIFO), Queues (FIFO), Two-Pointer Techniques, Hierarchical Data Structures (Binary Search Trees), Tree Traversals (Inorder, Preorder, Postorder), Self-Balancing Trees (AVL Trees & Rotations), Multi-Way & Color-Balanced Trees (2-3 Trees, Red-Black Trees).
