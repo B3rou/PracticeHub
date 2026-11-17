@@ -44,6 +44,11 @@ Welcome to the Data Structures and Algorithms section of my PracticeHub. This di
   * Implementation of single (`rotateLeft`, `rotateRight`) and double rotations (`rotateLeftRight`, `rotateRightLeft`).
   * Comparative analysis of height-balanced (AVL) vs. color-balanced (Red-Black) and multi-way (2-3) trees.
 
+- 📁 **[Week 10: Graph Data Structures (BFS & DFS)](./Week%2010)**
+  * Constructing undirected graphs using dynamic Adjacency Lists.
+  * Implementing level-order traversal via Breadth-First Search (BFS) with a FIFO Queue.
+  * Implementing branch-depth traversal via recursive Depth-First Search (DFS).
+
 ## Technologies & Concepts
 - **Language:** C
 - **Core Concepts:** Big-O Notation, Pointers, Dynamic Memory Management, Linear Data Structures (Singly & Doubly Linked Lists), Stacks (LIFO), Queues (FIFO), Two-Pointer Techniques, Hierarchical Data Structures (Binary Search Trees), Tree Traversals (Inorder, Preorder, Postorder), Self-Balancing Trees (AVL Trees & Rotations), Multi-Way & Color-Balanced Trees (2-3 Trees, Red-Black Trees).
